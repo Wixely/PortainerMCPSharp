@@ -1,0 +1,101 @@
+{
+  "Portainer": {
+    "Instances": [
+      {
+        "Alias": "local",
+        "BaseUrl": "https://localhost:9443/",
+        "ApiKey": "",
+        "Username": "",
+        "Password": "",
+        "Description": "",
+        "AllowInvalidCertificate": true
+      }
+    ],
+    "DefaultAlias": "local",
+
+    "ReadOnly": true,
+
+    "AllowStackDeploy": true,
+    "AllowStackLifecycle": true,
+    "AllowStackDelete": false,
+    "AllowContainerLifecycle": true,
+    "AllowContainerCreate": false,
+    "AllowContainerRemoval": false,
+    "AllowImagePull": true,
+    "AllowImageRemoval": false,
+    "AllowVolumeManagement": false,
+    "AllowNetworkManagement": false,
+    "AllowPrune": false,
+    "AllowSwarmMutation": false,
+    "AllowWebhookTrigger": true,
+
+    "AllowedEnvironmentIds": [],
+    "BlockedEnvironmentIds": [],
+    "AllowedStacks": [],
+    "BlockedStacks": [],
+    "BlockedContainers": [],
+    "ProtectPortainerItself": true,
+
+    "RedactSecrets": true,
+    "SecretKeyPattern": "PASSWORD|PASSWD|SECRET|TOKEN|APIKEY|API_KEY|CREDENTIAL|PRIVATE_KEY|_KEY$|^KEY$",
+
+    "EnableStacks": true,
+    "EnableEnvironments": true,
+    "EnableContainers": true,
+    "EnableImages": true,
+    "EnableVolumes": true,
+    "EnableNetworks": true,
+    "EnableSwarm": true,
+    "EnableRegistries": true,
+    "EnableSystem": true,
+
+    "DefaultEnvironmentId": null,
+    "MaxItems": 1000,
+    "MaxLogBytes": 200000,
+    "MaxJsonChars": 60000,
+    "MaxStackFileChars": 200000,
+    "DefaultWaitSeconds": 60,
+    "MaxWaitSeconds": 600,
+    "PollIntervalMs": 1500,
+    "RequestTimeoutSeconds": 120,
+    "UserAgent": "PortainerMCPSharp"
+  },
+  "Server": {
+    "Host": "localhost",
+    "Port": 5716,
+    "Path": "/mcp",
+    "WindowsServiceName": "PortainerMCPSharp",
+    "Password": ""
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "Microsoft.Hosting.Lifetime": "Information",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext}: {Message:lj}{NewLine}{Exception}"
+        }
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "logs/portainermcp-.log",
+          "rollingInterval": "Day",
+          "retainedFileCountLimit": 14,
+          "fileSizeLimitBytes": 52428800,
+          "rollOnFileSizeLimit": true,
+          "shared": true,
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {SourceContext}: {Message:lj}{NewLine}{Exception}"
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithProcessId", "WithThreadId" ]
+  }
+}
